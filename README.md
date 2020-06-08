@@ -24,6 +24,8 @@ this because there might be some details that could help someone:
 - Image cropping
 - S3 bucket access, incl. copying
 - Lambda function, hybrid one (can directly run locally but also in Lambda)
+- Dead man's switch check-in to an alerting system
+  * So that if this stops working, I get an alert
 
 
 Cropping

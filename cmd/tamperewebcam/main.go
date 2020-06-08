@@ -20,6 +20,7 @@ import (
 	"github.com/function61/gokit/dynversion"
 	"github.com/function61/gokit/ezhttp"
 	"github.com/function61/gokit/osutil"
+	"github.com/function61/lambda-alertmanager/pkg/alertmanagerclient"
 	"github.com/spf13/cobra"
 )
 
@@ -40,7 +41,31 @@ func main() {
 	osutil.ExitIfError(app.Execute())
 }
 
+// obtains, stores images and optionally makes a dead man's switch check-in
 func run(ctx context.Context) error {
+	if err := obtainAndStoreImage(ctx); err != nil {
+		return err
+	}
+
+	alertManager := alertmanagerclient.ClientFromEnvOptional()
+
+	if alertManager != nil {
+		if err := alertManager.DeadMansSwitchCheckin(
+			ctx,
+			"Tampere-webcam",
+			15*time.Minute,
+		); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+// - obtains image
+// - stores it as archived version
+// - copies the archived version to latest.jpg
+func obtainAndStoreImage(ctx context.Context) error {
 	bucketCtx, err := s3facade.Bucket("files.function61.com", nil, "us-east-1")
 	if err != nil {
 		return err
