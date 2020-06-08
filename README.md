@@ -20,9 +20,9 @@ Why is this open source?
 This can't directly benefit anyone, as there are many hardcoded details. But I open sourced
 this because there might be some details that could help someone:
 
-- Roundshot URL making
+- Roundshot (the provider that has multiple 360° cameras in my city) URL making
 - Image cropping
-- S3 bucket access
+- S3 bucket access, incl. copying
 - Lambda function, hybrid one (can directly run locally but also in Lambda)
 
 
