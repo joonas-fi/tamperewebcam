@@ -57,7 +57,7 @@ func run(ctx context.Context) error {
 	}
 
 	longTermKey := fmt.Sprintf("tampere-webcam/hiedanranta/%s.jpg", ts.UTC().Format("2006-01-02 15-04-05Z"))
-	latestKey := fmt.Sprintf("tampere-webcam/hiedanranta/%s", "latest.jpg")
+	latestKey := "tampere-webcam/hiedanranta/latest.jpg"
 
 	log.Printf("uploading to %s", longTermKey)
 
