@@ -111,6 +111,11 @@ func obtainImage(ctx context.Context, ts time.Time) (*bytes.Buffer, error) {
 
 	log.Println("cropping")
 
+	// for cropping to be of any sanity, check expected dimensions
+	if err := assertImageSize(img, 10752, 1841); err != nil {
+		return nil, err
+	}
+
 	cropped := imaging.Crop(img, image.Rect(8668, 0, 8668+1792, 1012))
 
 	// need buffer b/c S3 client needs io.ReadSeeker
@@ -162,4 +167,18 @@ type simpleFnLambdaAdapter struct {
 
 func (h *simpleFnLambdaAdapter) Invoke(ctx context.Context, payload []byte) ([]byte, error) {
 	return []byte{}, run(ctx)
+}
+
+func assertImageSize(img image.Image, width int, height int) error {
+	imgSize := img.Bounds().Size()
+	if imgSize.X != width || imgSize.Y != height {
+		return fmt.Errorf(
+			"expecting image size [%d,%d]; got [%d,%d]",
+			width,
+			height,
+			imgSize.X,
+			imgSize.Y)
+	}
+
+	return nil
 }
