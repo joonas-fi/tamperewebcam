@@ -26,7 +26,8 @@ import (
 
 func main() {
 	if lambdautils.InLambda() {
-		lambda.StartHandler(&simpleFnLambdaAdapter{run})
+		// we just assume it's a CloudWatch scheduler trigger so drop input payload
+		lambda.StartHandler(lambdautils.NoPayloadAdapter(run))
 		return
 	}
 
@@ -189,15 +190,6 @@ func floorTenMinutes(ts time.Time) time.Time {
 		0,
 		0,
 		ts.Location())
-}
-
-// adapts a simple function (discards payload, returns empty payload) as a Lambda handler
-type simpleFnLambdaAdapter struct {
-	fn func(context.Context) error
-}
-
-func (h *simpleFnLambdaAdapter) Invoke(ctx context.Context, payload []byte) ([]byte, error) {
-	return []byte{}, run(ctx)
 }
 
 func assertImageSize(img image.Image, width int, height int) error {

@@ -50,6 +50,8 @@ github.com/function61/gokit v0.0.0-20200604113808-64cb197f7d88 h1:D+70Z3Oigl6C7n
 github.com/function61/gokit v0.0.0-20200604113808-64cb197f7d88/go.mod h1:qkZftFp+nvc6BitjWRb9GXS4A1tQ2BuASctzscHa9Io=
 github.com/function61/gokit v0.0.0-20200608085334-b92d3f0b0c48 h1:wT81R/3qCHTQxqDLEdwlKeBisU0wHcyJuKsjewjJ67k=
 github.com/function61/gokit v0.0.0-20200608085334-b92d3f0b0c48/go.mod h1:qkZftFp+nvc6BitjWRb9GXS4A1tQ2BuASctzscHa9Io=
+github.com/function61/gokit v0.0.0-20200608105953-12235c68c38b h1:oSy6OCp5pk+hObohgNR7MT2Yj1A3f61fAuVnT/D0lJE=
+github.com/function61/gokit v0.0.0-20200608105953-12235c68c38b/go.mod h1:qkZftFp+nvc6BitjWRb9GXS4A1tQ2BuASctzscHa9Io=
 github.com/function61/html2pdf v0.4.0/go.mod h1:XF10dJNztmwIYzYyL7WjR3gapl792R+LSqq6gGOSCow=
 github.com/function61/lambda-alertmanager v1.0.0 h1:W6C8zrJqXn/q+CTexFeqN/HIrUnUtEBINVCg8eI1/WU=
 github.com/function61/lambda-alertmanager v1.0.0/go.mod h1:9e4VH+6LqHdGh32ZYkaeo3kdWi9h2CiMPIveDbrW0tw=
