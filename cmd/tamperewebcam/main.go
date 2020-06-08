@@ -65,7 +65,7 @@ func run(ctx context.Context) error {
 		Bucket:      bucketCtx.Name,
 		Key:         aws.String(longTermKey),
 		ContentType: aws.String("image/jpeg"),
-		Body:        bytes.NewReader(croppedFile.Bytes()), // TODO: more optimal?
+		Body:        bytes.NewReader(imgBytes.Bytes()),
 	}); err != nil {
 		return err
 	}
