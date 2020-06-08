@@ -23,7 +23,7 @@ type roundshotUrlBuilder struct {
 }
 
 func (r *roundshotUrlBuilder) Url(ts time.Time, size roundshotSizeVariant) (string, error) {
-	// these pranksters save them to storage in local time..
+	// these pranksters save them to storage in local time instead of UTC..
 	cameraTimezone, err := time.LoadLocation(r.cameraTimezone)
 	if err != nil {
 		return "", err

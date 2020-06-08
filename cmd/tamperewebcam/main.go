@@ -30,7 +30,7 @@ func main() {
 
 	app := &cobra.Command{
 		Use:     os.Args[0],
-		Short:   "PDF rasterizer",
+		Short:   "Tampere webcam",
 		Version: dynversion.Version,
 	}
 
@@ -127,10 +127,9 @@ func obtainCroppedImage(ctx context.Context, ts time.Time) (*bytes.Buffer, error
 
 func runEntry() *cobra.Command {
 	return &cobra.Command{
-		Use: "run",
-		// Short: "PDF rasterization via server",
-		// Args: cobra.ExactArgs(1),
-		Args: cobra.NoArgs,
+		Use:   "run",
+		Short: "Fetch & store webcam snapshot",
+		Args:  cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			osutil.ExitIfError(run(
 				osutil.CancelOnInterruptOrTerminate(nil)))
