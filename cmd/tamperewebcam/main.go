@@ -49,7 +49,7 @@ func run(ctx context.Context) error {
 	// - 14:07 to access 14:00
 	// - 14:17 to access 14:10
 	// - etc
-	ts := floorTenMinutes(time.Now().Add(-6 * time.Minute))
+	ts := floorTenMinutes(time.Now())
 
 	croppedFile, err := obtainCroppedImage(ctx, ts)
 	if err != nil {
