@@ -51,7 +51,7 @@ func run(ctx context.Context) error {
 	// - etc
 	ts := floorTenMinutes(time.Now())
 
-	croppedFile, err := obtainCroppedImage(ctx, ts)
+	imgBytes, err := obtainImage(ctx, ts)
 	if err != nil {
 		return err
 	}
@@ -88,7 +88,7 @@ func run(ctx context.Context) error {
 	return nil
 }
 
-func obtainCroppedImage(ctx context.Context, ts time.Time) (*bytes.Buffer, error) {
+func obtainImage(ctx context.Context, ts time.Time) (*bytes.Buffer, error) {
 	imgUrl, err := roundshotHiedanranta.Url(ts, roundshotImageSizeVariantFull)
 	if err != nil {
 		return nil, err
