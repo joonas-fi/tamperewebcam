@@ -57,14 +57,19 @@ func run(ctx context.Context) error {
 		return err
 	}
 
-	longTermKey := fmt.Sprintf("tampere-webcam/hiedanranta/%s.jpg", ts.UTC().Format("2006-01-02 15-04-05Z"))
-	latestKey := "tampere-webcam/hiedanranta/latest.jpg"
+	cameraPrefix := "tampere-webcam/hiedanranta"
 
-	log.Printf("uploading to %s", longTermKey)
+	latestKey := fmt.Sprintf("%s/latest.jpg", cameraPrefix)
+	archivedKey := fmt.Sprintf(
+		"%s/%s.jpg",
+		cameraPrefix,
+		ts.UTC().Format("2006-01-02 15-04-05Z"))
+
+	log.Printf("uploading to %s", archivedKey)
 
 	if _, err := bucketCtx.S3.PutObjectWithContext(ctx, &s3.PutObjectInput{
 		Bucket:      bucketCtx.Name,
-		Key:         aws.String(longTermKey),
+		Key:         aws.String(archivedKey),
 		ContentType: aws.String("image/jpeg"),
 		Body:        bytes.NewReader(imgBytes.Bytes()),
 	}); err != nil {
@@ -75,7 +80,7 @@ func run(ctx context.Context) error {
 
 	// copy source includes source bucket name in front, and also for somet reason needs to
 	// be URL escaped, while key does not
-	copySource := url.PathEscape(fmt.Sprintf("%s/%s", *bucketCtx.Name, longTermKey))
+	copySource := url.PathEscape(fmt.Sprintf("%s/%s", *bucketCtx.Name, archivedKey))
 
 	// metadata from source is copied, like content-type
 	if _, err := bucketCtx.S3.CopyObjectWithContext(ctx, &s3.CopyObjectInput{
