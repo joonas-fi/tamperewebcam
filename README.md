@@ -11,16 +11,39 @@ Published image at
 
 https://s3.amazonaws.com/files.function61.com/tampere-webcam/hiedanranta/latest.jpg
 
+I show this URL in my constantly-on info display at home.
+
+
+Why is this open source?
+------------------------
+
+This can't directly benefit anyone, as there are many hardcoded details. But I open sourced
+this because there might be some details that could help someone:
+
+- Roundshot URL making
+- Image cropping
+- S3 bucket access
+- Lambda function, hybrid one (can directly run locally but also in Lambda)
+
+
+Cropping
+--------
+
+Here's how the original image is cropped:
+
+![](docs/cropping.jpg)
+
 
 IAM policy
 ----------
+
+Good name for inline policy: `putWebcamImages`
 
 ```json
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "putWebcamImages",
             "Effect": "Allow",
             "Action": [
                 "s3:PutObject",
