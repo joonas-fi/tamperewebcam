@@ -16,6 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/disintegration/imaging"
 	"github.com/function61/gokit/aws/lambdautils"
+	"github.com/function61/gokit/aws/s3facade"
 	"github.com/function61/gokit/dynversion"
 	"github.com/function61/gokit/ezhttp"
 	"github.com/function61/gokit/osutil"
@@ -40,7 +41,7 @@ func main() {
 }
 
 func run(ctx context.Context) error {
-	bucketCtx, err := Bucket("files.function61.com", "us-east-1")
+	bucketCtx, err := s3facade.Bucket("files.function61.com", nil, "us-east-1")
 	if err != nil {
 		return err
 	}
