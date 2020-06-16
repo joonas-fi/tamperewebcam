@@ -51,10 +51,12 @@ func run(ctx context.Context) error {
 	alertManager := alertmanagerclient.ClientFromEnvOptional()
 
 	if alertManager != nil {
+		// we get ran every 10m, but use multiple >2 so the occasional late/un-fetchable
+		// one image doesn't bombard us with alerts
 		if err := alertManager.DeadMansSwitchCheckin(
 			ctx,
 			"Tampere-webcam",
-			15*time.Minute,
+			25*time.Minute,
 		); err != nil {
 			return err
 		}
